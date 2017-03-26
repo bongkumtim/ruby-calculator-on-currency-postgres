@@ -1,1 +1,9 @@
 <h1> Exchange Rate </h1>
+
+<% @posts.each do |post| %>
+<h2><%= post.title %>  <%= post.exchange %></h2>
+<p><%= link_to 'Delete', post_path(post), method: :delete, data: {Confirm: "Are you sure ?"} %>  <%= link_to 'Edit', edit_post_path(post) %></p>
+<% end %>
+
+
+<p><%= link_to 'Enter New Rate', new_post_path %></p>
