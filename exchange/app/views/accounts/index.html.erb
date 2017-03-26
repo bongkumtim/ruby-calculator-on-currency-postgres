@@ -11,5 +11,8 @@
   <%= link_to('Register', new_user_registration_path)  %><br>
   <%= link_to('Login', new_user_session_path)  %>  <br>
  
+<% end %><br>
+<% if current_user.superadmin_role? || current_user.supervisor_role? %>
+	<p>Visible only for superadmins and supervisors! </p>
+	<%= link_to 'Exchange Rate', posts_path %>
 <% end %>
-<%= link_to 'Exchange Rate', posts_path %>
