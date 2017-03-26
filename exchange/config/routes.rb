@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :accounts
+
+  get "/topup" => "accounts#topup"
 end
