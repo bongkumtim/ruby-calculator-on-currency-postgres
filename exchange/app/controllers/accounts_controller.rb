@@ -10,9 +10,13 @@ class AccountsController < ApplicationController
 
 	def new
 		@account = Account.new
+		@thai = Post.find(3).exchange
+		@sgd = Post.find(4).exchange
+		
 	end
 
 	def create
+		
 		@account = Account.new(account_params)
 		if @account.save
 			redirect_to root_path
@@ -40,7 +44,7 @@ class AccountsController < ApplicationController
 	private
 
 	def find
-		@account = Account.find(param[:id])
+		@account = Account.find(params[:id])
 	end
 
 	def account_params

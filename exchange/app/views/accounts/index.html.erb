@@ -29,7 +29,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Dashboard</a></li>
-        <li><%= link_to('Top Up e-Wallet', new_account_path)%></li>
+        <li><a href="/topup">Partner for Top Up</a></li>
         <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
         <% if current_user.superadmin_role? || current_user.supervisor_role? %>
@@ -46,7 +46,7 @@
       <h2>MeLAB</h2>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Dashboard</a></li>
-        <li><a href="/topup">Top Up e-Wallet</a></li>
+        <li><a href="/topup">Partner for Top Up</a></li>
         <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
         <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
         <% if current_user.superadmin_role? || current_user.supervisor_role? %>
@@ -59,73 +59,33 @@
 <%= link_to('Register', new_user_registration_path)%>
 <%= link_to('Login', new_user_session_path)%> 
 <% end %>
-    
     <div class="col-sm-9">
       <div class="well">
         <center><h4>Welcome <%= current_user.email %> to "MeLAB, not your extraordinary wallet"</h4>
         <p>Start using our services and start saving!</p></center>
       </div>
+       <% @accounts.each do |account| %>
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
-            <h4>RingCoin</h4>
-            <p>RM 1,000.00</p> 
+            <h4><%= account.title %></h4>
+            <p><%= '%.2f'%account.balance %></p>
+            <p><%= link_to "Top Up e-Wallet", edit_account_path(account) %></p>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>SingCoin</h4>
-            <p>SGD 1,000</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>Bath Coin</h4>
-            <p>THB 30,000</p> 
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="well">
-            <h4>BitCoin</h4>
-            <p>USD 500</p> 
-          </div>
-        </div>
+         <% end %>
       </div>
+     
+      <% @accounts.each do |account| %>
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="well">
-            <p>Debit</p> 
-            <p>Description</p> 
+            <p>Debit Top up <%= '%.2f'%account.balance %> </p> 
+            <p>Description <%= account.created_at %> </p> 
             <p>Credit</p> 
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Debit</p> 
-            <p>Description</p> 
-            <p>Credit</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Debit</p> 
-            <p>Description</p> 
-            <p>Credit</p> 
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="well">
-            <p>Text</p> 
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="well">
-            <p>Text</p> 
-          </div>
-        </div>
-      </div>
+           <% end %>
     </div>
   </div>
 </div>
